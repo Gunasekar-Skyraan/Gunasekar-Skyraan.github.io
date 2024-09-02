@@ -52,15 +52,11 @@
   <script>
     // Countdown Timer Function
     function countdownTimer() {
-      // Get today's date and time
-      const now = new Date("2024/12/12");
-      
-      // Set the countdown target date to 365 days from today
-      const countDownDate = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate()).getTime();
+      const countDownDate = new Date("2024/12/12").getTime();
 
       const updateCountdown = setInterval(function () {
-        const currentTime = new Date().getTime();
-        const distance = countDownDate - currentTime;
+        const now = new Date().getTime();
+        const distance = countDownDate - now;
 
         // Time calculations for days, hours, minutes, and seconds
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -74,10 +70,10 @@
         document.getElementById("minutes").innerHTML = minutes;
         document.getElementById("seconds").innerHTML = seconds;
 
-        // If the countdown is over, reset it to 365 days
+        // If the countdown is over, display a message
         if (distance < 0) {
           clearInterval(updateCountdown);
-          countdownTimer(); // Restart the countdown
+          document.getElementById("countdown").innerHTML = "We have launched!";
         }
       }, 1000);
     }
