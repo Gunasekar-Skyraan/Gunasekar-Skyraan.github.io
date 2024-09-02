@@ -52,11 +52,13 @@
   <script>
     // Countdown Timer Function
     function countdownTimer() {
-      const countDownDate = new Date("2024/12/12").getTime();
+      // Get the current year and set the countdown target date to the end of the year
+      const now = new Date();
+      const endOfYear = new Date(now.getFullYear(), 11, 31, 23, 59, 59).getTime();
 
       const updateCountdown = setInterval(function () {
-        const now = new Date().getTime();
-        const distance = countDownDate - now;
+        const currentTime = new Date().getTime();
+        const distance = endOfYear - currentTime;
 
         // Time calculations for days, hours, minutes, and seconds
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -70,10 +72,10 @@
         document.getElementById("minutes").innerHTML = minutes;
         document.getElementById("seconds").innerHTML = seconds;
 
-        // If the countdown is over, display a message
+        // If the countdown is over, reset it to next year's end of the year
         if (distance < 0) {
           clearInterval(updateCountdown);
-          document.getElementById("countdown").innerHTML = "We have launched!";
+          countdownTimer(); // Restart the countdown for the next year
         }
       }, 1000);
     }
